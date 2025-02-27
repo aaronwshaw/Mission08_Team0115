@@ -1,0 +1,45 @@
+@model Mission08_Team0115.Models.Task 
+
+@* Specifies we are using our Task model - our database that we set up *@
+
+<!-- Displays a title based on whether the TaskId is 0 (new task) or (some number) to edit an existing task -->
+<h2>@(Model.TaskId == 0 ? "Add Task" : "Edit Task")</h2>
+
+<!-- Determines the action to call on form submission (Create for new, Edit for existing). -->
+<form asp-action="@(Model.TaskId == 0 ? "Create" : "Edit")" method="post">
+    <input type="hidden" asp-for="TaskId" />  <!-- Hides the TaskId field in the form. Don't want user to see it -->
+
+    <div class="mb-3">  <!-- Container for the Task Name input. -->
+        <label asp-for="TaskName" class="form-label">Task Name</label>
+        <input asp-for="TaskName" class="form-control" required /> <!-- Input field for Task Name with required validation. -->
+    </div>
+
+    <div class="mb-3">  <!-- Container for the Due Date input. -->
+        <label asp-for="DueDate" class="form-label">Due Date</label> 
+        <input asp-for="DueDate" type="date" class="form-control" /> <!-- Input field for selecting a date (due date). -->
+    </div>
+
+    <div class="mb-3">  <!-- Container for the Quadrant dropdown. -->
+        <label asp-for="Quadrant" class="form-label">Quadrant</label> 
+        <select asp-for="Quadrant" class="form-control">
+            <option value="1">Important / Urgent</option>
+            <option value="2">Important / Not Urgent</option> 
+            <option value="3">Not Important / Urgent</option>  
+            <option value="4">Not Important / Not Urgent</option> 
+        </select>
+    </div>
+
+    <div class="mb-3">  <!-- Container for the Category dropdown. -->
+        <label asp-for="CategoryId" class="form-label">Category</label>  
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control"></select>  
+    </div>
+
+    <div class="mb-3">  <!-- Container for the Completed checkbox. -->
+        <label asp-for="Completed" class="form-label">Completed</label> 
+        <input asp-for="Completed" type="checkbox" />  <!-- Checkbox for marking task as completed. -->
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>  <!-- Submit button to save the task (create or edit). -->
+    <a asp-action="Quadrants" class="btn btn-secondary">Cancel</a>  <!-- Link to cancel the form and go to the Quadrants page. -->
+    <!-- Might need to change name -->
+</form>
