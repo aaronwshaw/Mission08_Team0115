@@ -6,12 +6,13 @@ namespace Mission08_Team0115.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ITaskRepository _repo; //repository constructor
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+        public HomeController(ITaskRepository temp) 
+        {  
+            _repo = temp;
         }
+
 
         public IActionResult Index()
         {
@@ -23,10 +24,6 @@ namespace Mission08_Team0115.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+
     }
 }
