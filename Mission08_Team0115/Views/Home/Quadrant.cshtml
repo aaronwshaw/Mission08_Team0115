@@ -1,3 +1,5 @@
+@model List<TaskItem>
+
 @{
     ViewData["Title"] = "Time Management Matrix";
 }
@@ -6,7 +8,6 @@
     <h2 class="text-center">Stephen Covey's Time Management Matrix</h2>
 
     <div class="row border">
-        <!-- Header Row -->
         <div class="col-4 border-end"></div>
         <div class="col-4 text-center fw-bold border-end p-2 bg-light">Urgent</div>
         <div class="col-4 text-center fw-bold p-2 bg-light">Not Urgent</div>
@@ -17,15 +18,35 @@
         <div class="col-4 text-center fw-bold border-end p-3 bg-light">Important</div>
         <div class="col-4 border-end p-3">
             <strong>Quadrant 1</strong><br>
-            Crises <br>
-            Pressing Problems <br>
-            Projects with Deadlines
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == "Quadrant1"))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @task.Name
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-primary">Update</a>
+                            <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a asp-action="Complete" asp-route-id="@task.Id" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </span>
+                    </li>
+                }
+            </ul>
         </div>
         <div class="col-4 p-3">
             <strong>Quadrant 2</strong><br>
-            Relationship Building <br>
-            Planning <br>
-            Recreation
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == "Quadrant2"))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @task.Name
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-primary">Update</a>
+                            <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a asp-action="Complete" asp-route-id="@task.Id" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </span>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 
@@ -34,17 +55,35 @@
         <div class="col-4 text-center fw-bold border-end p-3 bg-light">Not Important</div>
         <div class="col-4 border-end p-3">
             <strong>Quadrant 3</strong><br>
-            Interruptions <br>
-            Some Phone Calls <br>
-            Some Mail <br>
-            Some Reports
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == "Quadrant3"))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @task.Name
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-primary">Update</a>
+                            <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a asp-action="Complete" asp-route-id="@task.Id" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </span>
+                    </li>
+                }
+            </ul>
         </div>
         <div class="col-4 p-3">
             <strong>Quadrant 4</strong><br>
-            Busy Work <br>
-            Some Phone Calls <br>
-            Some Mail <br>
-            Time Wasters
+            <ul class="list-group">
+                @foreach (var task in Model.Where(t => t.Quadrant == "Quadrant4"))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @task.Name
+                        <span>
+                            <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-primary">Update</a>
+                            <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                            <a asp-action="Complete" asp-route-id="@task.Id" class="btn btn-sm btn-success">Mark as Completed</a>
+                        </span>
+                    </li>
+                }
+            </ul>
         </div>
     </div>
 </div>
