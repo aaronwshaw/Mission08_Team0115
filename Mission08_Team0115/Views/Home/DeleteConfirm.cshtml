@@ -1,0 +1,13 @@
+@model Task
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Delete @Model.TaskName?</h2>
+<br>
+<a asp-controller="Home" asp-route-delete = "@Model.TaskId" asp-action="DeleteTask" 
+   class="btn btn-danger">Delete</a>
+<br><br>
+<a asp-controller="Home" asp-action="Quadrant" class="btn btn-info">Cancel</a>
