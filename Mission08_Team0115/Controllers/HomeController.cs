@@ -36,7 +36,7 @@ namespace Mission08_Team0115.Controllers
             if (ModelState.IsValid)
             {
                 _repo.AddTask(response);  // Use repository method
-                return View("Confirmation", response);
+                return View("ConfirmAddEdit", response);
             }
             else
             {
