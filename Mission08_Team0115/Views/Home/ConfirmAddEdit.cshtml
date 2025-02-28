@@ -1,0 +1,45 @@
+@model Mission08_Team0115.Models.Task
+
+@{
+    ViewBag.Title = "Confirm Task";
+    Layout = "_Layout";
+}
+
+<h2>Confirm Task @(Model.TaskId == 0 ? "Addition" : "Edit")</h2>
+<p>Are you sure you want to @(Model.TaskId == 0 ? "add" : "edit") this task?</p>
+
+<div class="mb-3">
+    <strong>Task Name:</strong> @Model.TaskName
+</div>
+
+<div class="mb-3">
+    <strong>Due Date:</strong> @(Model.DueDate?.ToString("yyyy-MM-dd") ?? "No due date")
+</div>
+
+<div class="mb-3">
+    <strong>Quadrant:</strong> 
+    @(Model.Quadrant == 1 ? "Important / Urgent" 
+    : Model.Quadrant == 2 ? "Important / Not Urgent" 
+    : Model.Quadrant == 3 ? "Not Important / Urgent" 
+    : "Not Important / Not Urgent")
+</div>
+
+<div class="mb-3">
+    <strong>Category:</strong> @ViewBag.CategoryName
+</div>
+
+<div class="mb-3">
+    <strong>Completed:</strong> @(Model.Completed ? "Yes" : "No")
+</div>
+
+<form asp-action="@(Model.TaskId == 0 ? "ConfirmCreate" : "ConfirmEdit")" method="post">
+    <input type="hidden" asp-for="TaskId" />
+    <input type="hidden" asp-for="TaskName" />
+    <input type="hidden" asp-for="DueDate" />
+    <input type="hidden" asp-for="Quadrant" />
+    <input type="hidden" asp-for="CategoryId" />
+    <input type="hidden" asp-for="Completed" />
+
+    <button type="submit" class="btn btn-success">Confirm</button>
+    <a asp-action="AddEditTask" asp-route-id="@Model.TaskId" class="btn btn-warning">Go Back</a>
+</form>
