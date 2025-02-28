@@ -13,7 +13,7 @@
 </div>
 
 <div class="mb-3">
-    <strong>Due Date:</strong> @(Model.DueDate?.ToString("yyyy-MM-dd") ?? "No due date")
+    <strong>Due Date:</strong> @Model.DueDate
 </div>
 
 <div class="mb-3">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="mb-3">
-    <strong>Completed:</strong> @(Model.Completed ? "Yes" : "No")
+    <strong>Completed:</strong> @(Model.Completed == true ? "Yes" : "No")
 </div>
 
 <form asp-action="@(Model.TaskId == 0 ? "ConfirmCreate" : "ConfirmEdit")" method="post">

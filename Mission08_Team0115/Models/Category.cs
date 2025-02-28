@@ -9,5 +9,7 @@ namespace Mission08_Team0115.Models
         public int CategoryId { get; set; }
         [Required]
         public string CategoryName { get; set; }
+        
+        public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
     }
 }
