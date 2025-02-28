@@ -20,20 +20,6 @@ namespace Mission08_Team0115.Controllers
             return View();
         }
 
-        public IActionResult Quadrant()
-        {
-            var tasks = _context.Tasks
-            .Include(x => x.Category)
-            .OrderBy(x => x.CategoryName).ToList();
-            return View(tasks);
-        }
-
-
-
-
-
-
-
         public IActionResult Privacy()
         {
             return View();
