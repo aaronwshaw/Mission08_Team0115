@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Team0115.Models;
 
 namespace Mission08_Team0115.Controllers
@@ -18,6 +19,20 @@ namespace Mission08_Team0115.Controllers
         {
             return View();
         }
+
+        public IActionResult Quadrant()
+        {
+            var tasks = _context.Tasks
+            .Include(x => x.Category)
+            .OrderBy(x => x.CategoryName).ToList();
+            return View(tasks);
+        }
+
+
+
+
+
+
 
         public IActionResult Privacy()
         {
