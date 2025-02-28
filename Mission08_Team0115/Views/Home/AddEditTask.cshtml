@@ -6,7 +6,7 @@
 <h2>@(Model.TaskId == 0 ? "Add Task" : "Edit Task")</h2>
 
 <!-- Determines the action to call on form submission (Create for new, Edit for existing). -->
-<form asp-action="ConfirmAddEdit" method="post">
+<form asp-action="@(Model.TaskId == 0 ? "AddTask" : "Edit")" method="post">
     <input type="hidden" asp-for="TaskId" />  <!-- Hides the TaskId field in the form. Don't want user to see it -->
 
     <div class="mb-3">  <!-- Container for the Task Name input. -->
@@ -41,6 +41,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>  <!-- Submit button to save the task (create or edit). -->
-    <a asp-action="Quadrants" class="btn btn-secondary">Cancel</a>  <!-- Link to cancel the form and go to the Quadrants page. -->
+    <a asp-action="Quadrant" class="btn btn-secondary">Cancel</a> <!-- Link to cancel the form and go to the Quadrants page. -->
     <!-- Might need to change name -->
 </form>

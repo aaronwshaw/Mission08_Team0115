@@ -5,8 +5,7 @@
     Layout = "_Layout";
 }
 
-<h2>Confirm Task @(Model.TaskId == 0 ? "Addition" : "Edit")</h2>
-<p>Are you sure you want to @(Model.TaskId == 0 ? "add" : "edit") this task?</p>
+<h2>Task Successfully Added!</h2>
 
 <div class="mb-3">
     <strong>Task Name:</strong> @Model.TaskName
@@ -39,7 +38,4 @@
     <input type="hidden" asp-for="Quadrant" />
     <input type="hidden" asp-for="CategoryId" />
     <input type="hidden" asp-for="Completed" />
-
-    <button type="submit" class="btn btn-success">Confirm</button>
-    <a asp-action="AddEditTask" asp-route-id="@Model.TaskId" class="btn btn-warning">Go Back</a>
 </form>
