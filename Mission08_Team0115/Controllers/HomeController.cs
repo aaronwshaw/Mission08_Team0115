@@ -78,7 +78,7 @@ namespace Mission08_Team0115.Controllers
         }
 
         [HttpGet]
-        public IActionResult DeleteTask(int taskID)
+        public IActionResult Delete(int taskID)
         {
             var recordToDelete = _repo.Tasks
                 .Single(x => x.TaskId == taskID);
@@ -87,7 +87,7 @@ namespace Mission08_Team0115.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteTask(Models.Task recordToDelete)
+        public IActionResult Delete(Models.Task recordToDelete)
         {
             _repo.DeleteTask(recordToDelete);  // Use repository method
             return RedirectToAction("Quadrant");
