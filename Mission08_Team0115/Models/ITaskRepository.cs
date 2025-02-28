@@ -8,9 +8,9 @@ namespace Mission08_Team0115.Models
         IQueryable<Task> Tasks { get; }
         IQueryable<Category> Categories { get; }
 
-        void AddTask(Task task);
-        void UpdateTask(Task task);
-        void DeleteTask(Task task);
-        void Save();
+        public void AddTask(Task task);
+        public void UpdateTask(Task task);
+        public void DeleteTask(Task task);
+        public void Save();
     }
 }
