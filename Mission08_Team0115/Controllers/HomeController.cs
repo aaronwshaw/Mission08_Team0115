@@ -26,11 +26,11 @@ namespace Mission08_Team0115.Controllers
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
-            return View("AddEditTask", new Task());
+            return View("AddEditTask", new Models.Task());
         }
 
         [HttpPost]
-        public IActionResult AddTask(Task response)
+        public IActionResult AddTask(Models.Task response)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace Mission08_Team0115.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Task updatedTask)
+        public IActionResult Edit(Models.Task updatedTask)
         {
             _repo.UpdateTask(updatedTask);  // Use repository method
             return RedirectToAction("Quadrant");
@@ -86,7 +86,7 @@ namespace Mission08_Team0115.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteTask(Task recordToDelete)
+        public IActionResult DeleteTask(Models.Task recordToDelete)
         {
             _repo.DeleteTask(recordToDelete);  // Use repository method
             return RedirectToAction("Quadrant");
