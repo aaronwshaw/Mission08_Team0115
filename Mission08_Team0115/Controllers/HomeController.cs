@@ -1,5 +1,4 @@
-using System.Diagnostics;
-using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mission08_Team0115.Models;
@@ -8,44 +7,39 @@ namespace Mission08_Team0115.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskDb.TaskDbContext _context;
+        private ITaskRepository _repo;
 
-        public HomeController(TaskDb.TaskDbContext temp) // Constructor
+        public HomeController(ITaskRepository temp)
         {
-            _context = temp;
+            _repo = temp;
         }
 
-        // Actions for the different page views
         public IActionResult Index()
         {
             return View();
         }
 
-        // Takes you to the AddTask page
         [HttpGet]
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
             return View("AddEditTask", new Task());
         }
 
-        // Adds the new task - redirects to confirmation
         [HttpPost]
         public IActionResult AddTask(Task response)
         {
             if (ModelState.IsValid)
             {
-                _context.Tasks.Add(response);
-                _context.SaveChanges();
-
+                _repo.AddTask(response);  // Use repository method
                 return View("Confirmation", response);
             }
             else
             {
-                ViewBag.Categories = _context.Categories
+                ViewBag.Categories = _repo.Categories
                     .OrderBy(x => x.CategoryName)
                     .ToList();
 
@@ -53,57 +47,48 @@ namespace Mission08_Team0115.Controllers
             }
         }
 
-        // View for the Quadrant Page
         public IActionResult Quadrant()
         {
-            var tasks = _context.Tasks
-                .Include(x => x.Category) // Assuming the navigation property is singular
+            var tasks = _repo.Tasks
+                .Include(x => x.Category)
                 .ToList();
 
             return View(tasks);
         }
 
-        // Populates the AddEditTask view with the data from the task you want to edit
         [HttpGet]
         public IActionResult Edit(int taskID)
         {
-            var task = _context.Tasks
+            var task = _repo.Tasks
                 .Single(x => x.TaskId == taskID);
 
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
             return View("AddEditTask", task);
         }
 
-        // Submit the edited task and redirects to Quadrant page
         [HttpPost]
         public IActionResult Edit(Task updatedTask)
         {
-            _context.Tasks.Update(updatedTask);
-            _context.SaveChanges();
-
+            _repo.UpdateTask(updatedTask);  // Use repository method
             return RedirectToAction("Quadrant");
         }
 
-        // Finds the task you want to delete
         [HttpGet]
         public IActionResult DeleteTask(int taskID)
         {
-            var recordToDelete = _context.Tasks
+            var recordToDelete = _repo.Tasks
                 .Single(x => x.TaskId == taskID);
 
             return View("DeleteConfirm", recordToDelete);
         }
 
-        // Deletes the task
         [HttpPost]
         public IActionResult DeleteTask(Task recordToDelete)
         {
-            _context.Tasks.Remove(recordToDelete);
-            _context.SaveChanges();
-
+            _repo.DeleteTask(recordToDelete);  // Use repository method
             return RedirectToAction("Quadrant");
         }
     }

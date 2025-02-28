@@ -1,22 +1,41 @@
-﻿
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
 namespace Mission08_Team0115.Models
 {
     public class EFTaskRepository : ITaskRepository
     {
-        private TaskDbContext _dbContext;
-        public EFTaskRepository(TaskDbContext temp) 
-        { 
-            _dbContext = temp;
+        private TaskDbContext _context;
+
+        public EFTaskRepository(TaskDbContext ctx)
+        {
+            _context = ctx;
         }
 
-        public List<Task> Tasks => _dbContext.Tasks.ToList() ;
-
-        public List<Category> Categories => _dbContext.Categories.ToList();
+        public IQueryable<Task> Tasks => _context.Tasks;
+        public IQueryable<Category> Categories => _context.Categories;
 
         public void AddTask(Task task)
         {
-            _dbContext.Tasks.Add(task) ;
-            _dbContext.SaveChanges();
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+        }
+
+        public void UpdateTask(Task task)
+        {
+            _context.Tasks.Update(task);
+            _context.SaveChanges();
+        }
+
+        public void DeleteTask(Task task)
+        {
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }
