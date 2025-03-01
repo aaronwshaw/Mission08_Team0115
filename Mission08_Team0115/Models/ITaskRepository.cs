@@ -12,5 +12,7 @@ namespace Mission08_Team0115.Models
         public void Edit(Task task);
         public void Delete(Task task);
         public void Save();
+
+        void UpdateComplete(int taskId);  // Update only the completion status
     }
 }

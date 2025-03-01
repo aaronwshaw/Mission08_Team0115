@@ -37,5 +37,18 @@ namespace Mission08_Team0115.Models
         {
             _context.SaveChanges();
         }
+
+        public void UpdateComplete(int taskId)
+        {
+            // Find the task directly by TaskId
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == taskId);
+
+            if (task != null)
+            {
+                task.Completed = true;  // Set Completed to 1
+                _context.Tasks.Update(task);  // Update the task in the context
+                _context.SaveChanges();  // Save changes to the database
+            }
+        }
     }
 }
