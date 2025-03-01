@@ -48,10 +48,12 @@ namespace Mission08_Team0115.Controllers
             }
         }
 
+        //Load the quadrant page
         public IActionResult Quadrant()
         {
             var tasks = _repo.Tasks
                 .Include(x => x.Category)
+                .Where(t => t.Completed != true)  // Filter out completed tasks
                 .ToList();
 
             return View(tasks);
@@ -92,5 +94,15 @@ namespace Mission08_Team0115.Controllers
             _repo.Delete(recordToDelete);  // Use repository method
             return RedirectToAction("Quadrant");
         }
+
+
+        //Mark task as completed
+        [HttpGet]
+        public IActionResult Complete(int taskId)
+        {
+            _repo.UpdateComplete(taskId);  // Call the renamed method to mark the task as completed
+            return RedirectToAction("Quadrant");  // Redirect back to the quadrant page
+        }
+
     }
 }
