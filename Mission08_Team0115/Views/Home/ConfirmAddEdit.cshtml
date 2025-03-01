@@ -7,15 +7,15 @@
 
 <h2>Task Successfully Added!</h2>
 
-<div class="mb-3">
+<div class="mb-3; col-12">
     <strong>Task Name:</strong> @Model.TaskName
 </div>
 
-<div class="mb-3">
+<div class="mb-3; col-6">
     <strong>Due Date:</strong> @Model.DueDate
 </div>
 
-<div class="mb-3">
+<div class="mb-3; col-6">
     <strong>Quadrant:</strong> 
     @(Model.Quadrant == 1 ? "Important / Urgent" 
     : Model.Quadrant == 2 ? "Important / Not Urgent" 
@@ -23,11 +23,11 @@
     : "Not Important / Not Urgent")
 </div>
 
-<div class="mb-3">
+<div class="mb-3; col-6">
     <strong>Category:</strong> @ViewBag.CategoryName
 </div>
 
-<div class="mb-3">
+<div class="mb-3; col-6">
     <strong>Completed:</strong> @(Model.Completed == true ? "Yes" : "No")
 </div>
 
