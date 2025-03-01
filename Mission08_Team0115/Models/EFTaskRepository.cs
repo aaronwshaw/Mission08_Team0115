@@ -21,13 +21,13 @@ namespace Mission08_Team0115.Models
             _context.SaveChanges();
         }
 
-        public void UpdateTask(Task task)
+        public void Edit(Task task)
         {
             _context.Tasks.Update(task);
             _context.SaveChanges();
         }
 
-        public void DeleteTask(Task task)
+        public void Delete(Task task)
         {
             _context.Tasks.Remove(task);
             _context.SaveChanges();
