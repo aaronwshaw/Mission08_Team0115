@@ -8,7 +8,8 @@
 <!-- Determines the action to call on form submission (Create for new, Edit for existing). -->
 <form asp-action="@(Model.TaskId == 0 ? "AddTask" : "Edit")" method="post">
     <input type="hidden" asp-for="TaskId" />  <!-- Hides the TaskId field in the form. Don't want user to see it -->
-
+    <input type="hidden" asp-for="Completed" value="false" />
+    
     <div class="mb-3">  <!-- Container for the Task Name input. -->
         <label asp-for="TaskName" class="form-label">Task Name</label>
         <input asp-for="TaskName" class="form-control" required /> <!-- Input field for Task Name with required validation. -->
