@@ -15,11 +15,14 @@ namespace Mission08_Team0115.Controllers
             _repo = temp;
         }
 
+        //Home page
         public IActionResult Index()
         {
             return View();
         }
 
+
+        //Action to pull up the addedittask page for a new task
         [HttpGet]
         public IActionResult AddTask()
         {
@@ -30,6 +33,8 @@ namespace Mission08_Team0115.Controllers
             return View("AddEditTask", new Models.Task());
         }
 
+
+        //Action to add the new task to the database
         [HttpPost]
         public IActionResult AddTask(Models.Task response)
         {
@@ -48,7 +53,9 @@ namespace Mission08_Team0115.Controllers
             }
         }
 
-        //Load the quadrant page
+
+
+        //Load the quadrant page with only noncompleted tasks
         public IActionResult Quadrant()
         {
             var tasks = _repo.Tasks
@@ -59,6 +66,8 @@ namespace Mission08_Team0115.Controllers
             return View(tasks);
         }
 
+
+        //Action to edit the task in the addedittask view
         [HttpGet]
         public IActionResult Edit(int TaskID)
         {
@@ -72,6 +81,7 @@ namespace Mission08_Team0115.Controllers
             return View("AddEditTask", task);
         }
 
+        //Action to post the editted task to the database
         [HttpPost]
         public IActionResult Edit(Models.Task updatedTask)
         {
@@ -79,6 +89,7 @@ namespace Mission08_Team0115.Controllers
             return RedirectToAction("Quadrant");
         }
 
+        //Action to pull up the delete confirmation page for a specific task
         [HttpGet]
         public IActionResult Delete(int TaskId)
         {
@@ -88,6 +99,7 @@ namespace Mission08_Team0115.Controllers
             return View("DeleteConfirm", recordToDelete);
         }
 
+        //Action to officially delete the task from the database
         [HttpPost]
         public IActionResult Delete(Models.Task recordToDelete)
         {
