@@ -6,7 +6,7 @@
 <h2>@(Model.TaskId == 0 ? "Add Task" : "Edit Task")</h2>
 
 <!-- Determines the action to call on form submission (Create for new, Edit for existing). -->
-<form asp-action="@(Model.TaskId == 0 ? "AddTask" : "Edit")" method="post">
+<form asp-action="@(Model.TaskId == 0 ? "AddTask" : "Edit")" method="post" class="col-6">
     <input type="hidden" asp-for="TaskId" />  <!-- Hides the TaskId field in the form. Don't want user to see it -->
     <input type="hidden" asp-for="Completed" value="false" />
     
