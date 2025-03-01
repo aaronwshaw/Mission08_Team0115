@@ -7,7 +7,10 @@
 
 <h2>Delete @Model.TaskName?</h2>
 <br>
-<a asp-controller="Home" asp-route-delete = "@Model.TaskId" asp-action="DeleteTask" 
-   class="btn btn-danger">Delete</a>
+<!-- Form for deleting the record -->
+<form method="post" asp-controller="Home" asp-action="Delete">
+    <input type="hidden" name="TaskId" value="@Model.TaskId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
 <br><br>
 <a asp-controller="Home" asp-action="Quadrant" class="btn btn-info">Cancel</a>

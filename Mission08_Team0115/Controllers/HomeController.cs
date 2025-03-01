@@ -58,10 +58,10 @@ namespace Mission08_Team0115.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int taskID)
+        public IActionResult Edit(int TaskID)
         {
             var task = _repo.Tasks
-                .Single(x => x.TaskId == taskID);
+                .Single(x => x.TaskId == TaskID);
 
             ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
@@ -73,15 +73,15 @@ namespace Mission08_Team0115.Controllers
         [HttpPost]
         public IActionResult Edit(Models.Task updatedTask)
         {
-            _repo.UpdateTask(updatedTask);  // Use repository method
+            _repo.Edit(updatedTask);  // Use repository method
             return RedirectToAction("Quadrant");
         }
 
         [HttpGet]
-        public IActionResult Delete(int taskID)
+        public IActionResult Delete(int TaskId)
         {
             var recordToDelete = _repo.Tasks
-                .Single(x => x.TaskId == taskID);
+                .Single(x => x.TaskId == TaskId);
 
             return View("DeleteConfirm", recordToDelete);
         }
@@ -89,7 +89,7 @@ namespace Mission08_Team0115.Controllers
         [HttpPost]
         public IActionResult Delete(Models.Task recordToDelete)
         {
-            _repo.DeleteTask(recordToDelete);  // Use repository method
+            _repo.Delete(recordToDelete);  // Use repository method
             return RedirectToAction("Quadrant");
         }
     }
